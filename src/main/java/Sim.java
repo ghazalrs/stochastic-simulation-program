@@ -14,7 +14,7 @@ public class Sim {
 
     /** Global quantities used throughout the simulation */
     public static double simulationTime;         // What time is it?
-    public static double reportinterval;         // How often should we report?
+    public static double reportInterval;         // How often should we report?
 
     // quantities that determine how we model the real world
     // In a more elaborate program, these might be input data.
@@ -60,14 +60,14 @@ public class Sim {
 
         // Read data and print introduction.
         // Inputs (each on its own line):
-        //   reportinterval (double)
+        //   reportInterval (double)
         //   endingTime (double)
         //   numPumps (int)
         //   seed for arrivalStream (int)
         //   seed for litreStream (int)
         //   seed for balkingStream (int)
         //   seed for serviceStream (int)
-        reportinterval = Double.parseDouble(in.readLine().trim());
+        reportInterval = Double.parseDouble(in.readLine().trim());
         double endingTime = Double.parseDouble(in.readLine().trim());
         int numPumps = Integer.parseInt(in.readLine().trim());
 
@@ -104,8 +104,8 @@ public class Sim {
         EndOfSimulation lastEvent = new EndOfSimulation(endingTime);
         eventList.insert(lastEvent);
 
-        if (reportinterval <= endingTime && reportinterval > 0) {
-            Report nextReport = new Report(reportinterval);
+        if (reportInterval <= endingTime && reportInterval > 0) {
+            Report nextReport = new Report(reportInterval);
             eventList.insert(nextReport);
         }
 
@@ -640,7 +640,7 @@ class Report extends Event {
     public void makeItHappen() {
         Sim.stats.snapshot();
         // Schedule the next interim report.
-        setTime(Sim.simulationTime + Sim.reportinterval);
+        setTime(Sim.simulationTime + Sim.reportInterval);
         if (getTime() <= Sim.simulationTime) return; // guard
         Sim.eventList.insert(this);
     }
