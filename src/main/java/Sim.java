@@ -41,6 +41,7 @@ public class Sim {
     public static double meaninterarrivalTime = 50.0; // seconds
 
     // random-number streams used to model the world
+    // separate streams for different random variables
     public static Random arrivalStream;  // auto arrival times
     public static Random litreStream;    // number of litres needed
     public static Random balkingStream;  // balking probability
@@ -74,6 +75,7 @@ public class Sim {
         System.out.print("This simulation run uses " + numPumps + " pumps");
         System.out.println(" and the following random number seeds:");
 
+        // 4 random number seeds (one for each stream)
         int seed = Integer.parseInt(in.readLine().trim());
         arrivalStream = new Random(seed);
         System.out.print(" " + seed);
@@ -92,6 +94,7 @@ public class Sim {
         System.out.println();
 
         // Create and initialize the event list, the car queue, the pump stand, and the statistics collector.
+        // Create core components (data structures)
         eventList = new EventList();
         carQueue = new CarQueue();
         pumpStand = new PumpStand(numPumps);
@@ -110,19 +113,26 @@ public class Sim {
         }
 
         // (Should the first car really arrive at time 0?)
+        // Schedule the first arrival event at time 0
         eventList.insert(new Arrival(0.0));
 
         // The "clock driver" loop
         while (true) {
+            // Fetch the earliest future event
             Event currentEvent = eventList.takeNextEvent();
             if (currentEvent == null) {
                 System.out.println("Error! ran out of events");
                 break;
             }
+
+            // Each iteration of the loop jumps from one event to the next in the timeline
+            // Set simulated time to the time of the event being processed
             simulationTime = currentEvent.getTime();
+            // executes the event
             currentEvent.makeItHappen();
             if (currentEvent instanceof EndOfSimulation) break;
         }
+        // The loop breaks if event list is empty or if the event being processed is an EndOfSimulation event
     }
 }
 
@@ -132,6 +142,7 @@ public class Sim {
  */
 class Statistics {
     // The explicit initializations are not needed, but improve clarity.
+    // Metrics
     private int totalArrivals = 0;
     private int customersServed = 0;
     private int balkingCustomers = 0;
@@ -149,6 +160,7 @@ class Statistics {
         printHeaders();
     }
 
+    // Methods to update metrics, called from events
     /**
      * accumBalk: record and count a lost sale.
      */
@@ -186,6 +198,7 @@ class Statistics {
         totalArrivals += 1;
     }
 
+    // Formatting helpers to keep the report columns aligned in plain text
     /**
      * fmtDbl: convert a double to a string of a specified width representing
      * the number rounded to the specified number of digits. The string
