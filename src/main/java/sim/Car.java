@@ -3,7 +3,7 @@ package sim;
 /**
  * Car: the class representing cars.
  */
-class Car {
+public class Car {
     private double arrivalTime;
     private final double litresNeeded;
 

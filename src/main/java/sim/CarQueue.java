@@ -3,7 +3,7 @@ package sim;
 /**
  * CarQueue: the class representing the lineup of cars at the gas station.
  */
-class CarQueue {
+public class CarQueue {
 
     /** QueueItem: the class for objects stored in the car queue. */
     private static class QueueItem {

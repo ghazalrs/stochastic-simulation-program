@@ -3,7 +3,7 @@ package sim;
 /**
  * Event: the class representing events within the simulation model.
  */
-abstract class Event {
+public abstract class Event {
     private double time; // the time when the event happens
 
     public Event(double time) {

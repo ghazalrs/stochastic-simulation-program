@@ -4,7 +4,7 @@ package sim;
  * EventList: the class for the event list.
  * (There is only one object of this class in the program.)
  */
-class EventList {
+public class EventList {
 
     /** ListItem: the class for objects stored in the event list. */
     private static class ListItem {
