@@ -80,20 +80,15 @@ public class Sim {
         // 4 random number seeds (one for each stream)
         int seed = Integer.parseInt(in.readLine().trim());
         arrivalStream = new Random(seed);
-        System.out.print(" " + seed);
 
         seed = Integer.parseInt(in.readLine().trim());
         litreStream = new Random(seed);
-        System.out.print(" " + seed);
 
         seed = Integer.parseInt(in.readLine().trim());
         balkingStream = new Random(seed);
-        System.out.print(" " + seed);
 
         seed = Integer.parseInt(in.readLine().trim());
         serviceStream = new Random(seed);
-        System.out.print(" " + seed);
-        System.out.println();
 
         // Create and initialize the event list, the car queue, the pump stand, and the statistics collector.
         // Create core components (data structures)
