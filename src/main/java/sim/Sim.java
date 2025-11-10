@@ -80,7 +80,7 @@ public class Sim {
         // 4 random number seeds (one for each stream)
         int seed = Integer.parseInt(in.readLine().trim());
         arrivalStream = new Random(seed);
-        System.our.print(" " + seed);
+        System.out.print(" " + seed);
 
         seed = Integer.parseInt(in.readLine().trim());
         litreStream = new Random(seed);
